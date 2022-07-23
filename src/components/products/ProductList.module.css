@@ -1,0 +1,30 @@
+
+.div_sorting {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  
+}
+
+.div_sorting button {
+  margin: 0.1rem;
+  border: 1px solid #238e2a;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  color: #238e2a;
+  font-family: sans-serif;
+}
+
+.div_sorting button:hover {
+  background-color: white;
+}
+
+.div_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
