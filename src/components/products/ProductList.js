@@ -3,55 +3,55 @@ import ProductItem from "./ProductItem";
 import { Fragment } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-const sortProducts = (products, sortBy, sortAsc) => {
-  if (sortBy === "price") {
-    return products.sort((productA, productB) => {
-      if (sortAsc) {
-        return productA.price > productB.price ? 1 : -1;
-      } else {
-        return productA.price < productB.price ? 1 : -1;
-      }
-    });
-  }
-  if (sortBy === "alpha") {
-    return products.sort((productA, productB) => {
-      if (sortAsc) {
-        return productA.pnam > productB.pnam ? 1 : -1;
-      } else {
-        return productA.pnam < productB.pman ? 1 : -1;
-      }
-    });
-  }
-};
-
 const ProductList = (props) => {
+  
   const history = useHistory();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
+  const receivedProducts = props.products;
   let sortedProducts = [];
-  let sorted = false;
+
   if (queryParams.get("price") === "asc") {
-    sortedProducts = sortProducts(props.products, "price", true);
-    sorted = true;
+    sortedProducts = receivedProducts.sort((productA, productB) => {
+      return productA.price > productB.price ? 1 : -1;
+    });
   }
 
   if (queryParams.get("price") === "desc") {
-    sortedProducts = sortProducts(props.products, "price", false);
-    sorted = true;
+    sortedProducts = receivedProducts.sort((productA, productB) => {
+      return productA.price < productB.price ? 1 : -1;
+    });
+  }
+
+  if (queryParams.get("alpha") === "asc") {
+    sortedProducts = receivedProducts.sort((productA, productB) => {
+      return productA.pnam > productB.pnam ? 1 : -1;
+    });
   }
 
   if (queryParams.get("alpha") === "desc") {
-    sortedProducts = sortProducts(props.products, "alpha", false);
-    sorted = true;
+    sortedProducts = receivedProducts.sort((productA, productB) => {
+      return productA.pnam < productB.pnam ? 1 : -1;
+    });
   }
 
-  if (!sorted) {
-    sortedProducts = sortProducts(props.products, "alpha", true);
+  if (queryParams.get("alpha") === null && queryParams.get("price") === null) {
+    sortedProducts = receivedProducts.sort((productA, productB) => {
+      return productA.pnam > productB.pnam ? 1 : -1;
+    });
   }
 
   const sortAlphaHandler = () => {
-    if (!sorted) {
+    if (
+      queryParams.get("alpha") === null &&
+      queryParams.get("price") === null
+    ) {
+      history.push("/products?alpha=desc");
+      return;
+    }
+
+    if (queryParams.get("alpha") === "asc") {
       history.push("/products?alpha=desc");
     } else {
       history.push("/products?alpha=asc");
@@ -69,15 +69,9 @@ const ProductList = (props) => {
   return (
     <Fragment>
       <div className={classes.div_sorting}>
-        <button
-        onClick={sortAlphaHandler}>
-          Sort by Name
-        </button>
-        <button onClick={sortPriceHandler}>
-          Sort by Price
-        </button>
+        <button onClick={sortAlphaHandler}>Sort by Name</button>
+        <button onClick={sortPriceHandler}>Sort by Price</button>
       </div>
-
 
       <ul className={classes.div_list}>
         {sortedProducts.map((product) => (

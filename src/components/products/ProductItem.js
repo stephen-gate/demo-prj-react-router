@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import classes from "./ProductItem.module.css";
 
 const ProductItem = (props) => {
+
   return (
     <li className={classes.item_line}>
       <div className={classes.name_box}>

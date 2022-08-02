@@ -1,35 +1,37 @@
-import React from 'react'
+import { NavLink } from "react-router-dom";
 
 const Links = () => {
-  return (
-    <div>Links
-      <p>text-align: center;  ?</p>
-      <p>this could be called ROUTES</p>
-    <p>http://localhost:3000/products/p1/spec</p>
-    <p>http://localhost:3000/qwerty  PageNotFound</p>
-<p>http://localhost:3000/products?sort=desc</p>
-<p>http://localhost:3000/products?sort=asc</p>
-    <div>
-      <p>// navigate away programatically push or replace
-// imperetive (programmatic) navigation
-// as RETURN from products
-    history.push('/products');</p></div>
+  
+const splitUrl = window.location.href.split("/links");
 
-    <div><p>http://localhost:3000/products/p3/spec</p>
-    <p>embrace the functionality react-router gives us
-      and move the link button into a route so that it
-      only appears when /comments is not part of the url 
-      This nested route, conditionally rendering components
-      could be used app wide - it is in effect replacing
-      a more complex state management allowing react-router
-      to manage state for us</p>
-      <p>we could use the features of useRouteMatch
-      to replace this path and make the component more
-      manageable if required elsewhere on if the sitemap
-      changes </p>
+  return (
+    <div>
+<p>example urls that externally link to specfied demo pages:</p>
+<br />
+<p>url: products page, sorted by price descending</p>
+<NavLink to="/products?price=desc">
+    {splitUrl[0]}/products?price=desc         
+</NavLink>
+<br />
+<br />
+<p>url: product page for product p2</p>
+<NavLink to="/products/p2">
+    {splitUrl[0]}/products/p2         
+</NavLink>
+
+<br />
+<br />
+<p>url: product p3 spec.</p>
+<NavLink to="/products/p3/spec">
+    {splitUrl[0]}/products/p3/spec         
+</NavLink>
+<br />
+
     </div>
-    </div>
+
+
+
   )
 }
 
-export default Links
+export default Links;

@@ -2,10 +2,9 @@ import classes from './ProductSpec.module.css';
 
 const ProductSpec = () => {
 
-  const text_spec="This is an example of react-router Nested Routes being used" +
-  " to conditionally modify which components are displayed." +
-  "  The buttons here use react-router Link components. Hence, here, " +
-  " react-router is being used in place of react State Management. ";
+  const text_spec="An example of react-router Nested Routes being used" +
+  " to conditionally modify which components are displayed," +
+  " and as such used in place of react State Management. ";
 
   return (
 
